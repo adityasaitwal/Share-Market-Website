@@ -1,0 +1,110 @@
+@import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+@import url('https://fonts.googleapis.com/css2?family=BenchNine:wght@700&display=swap');
+
+@layer demo, ol-cards;
+
+@layer ol-cards {
+  .ol-cards {  
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: ol-cards;
+
+  }
+  .ol-cards > li {
+    --color-bg: #FFFFFF;
+    --color-text: #1D1E22;
+    --ff-1: system-ui;
+    --ff-2: 'BenchNine', sans-serif;
+    --icon-width: 4rem;
+    --number-width: 3.5rem;
+    --outset: 0.5rem;
+    --shadow-color-rgb: 0 0 0; 
+    
+    counter-increment: ol-cards;
+    display: grid;
+    grid-template-rows: max-content max-content auto max-content;
+    justify-items: center;
+    text-align: center;
+    background-color: var(--color-bg);
+    background-image: linear-gradient(to top left, rgb(var(--shadow-color-rgb) / .125), transparent 50%);
+    padding: 1rem 1.5rem 0 1.5rem;
+    border-radius: 1rem;
+    position: relative;
+ 
+    color: var(--color-text);
+    font-family: var(--ff-1);
+    margin-bottom: var(--outset);
+  }
+
+  .ol-cards > li > .icon{
+    display: grid;
+    place-items: center;
+    width: var(--icon-width);
+    font-size: calc(var(--icon-width) * .35);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    box-shadow: 
+      inset 1rem 1rem 2rem rgb(0 0 0 / .25),
+      inset -1rem -1rem 2rem rgb(255 255 255 / .75)
+  }
+  .ol-cards > li > .title {
+    color: var(--color-accent);
+    text-transform: uppercase;
+    font-family: var(--ff-2);
+    font-size: 1.5rem;
+  }
+
+
+  .ol-cards > li::after{
+    width: var(--number-width);
+    margin-top: 1rem;
+    padding-top: 0.25rem;
+    content: counter(ol-cards, decimal-leading-zero);
+    font-family: var(--ff-2);
+    font-size: 1.25rem;
+    color: var(--color-bg);
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: var(--color-accent);
+  }
+  .ol-cards > li::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: calc(var(--number-width) + var(--outset) * 4);
+    height: calc(var(--outset) * 2);
+    top: calc(100% - var(--outset));
+    background-color: var(--color-accent);
+    --grad: rgb(0 0 0 / .75) var(--outset), transparent 0;
+    background-image:
+      radial-gradient( circle at var(--outset), var(--grad)),
+      radial-gradient( circle at calc(100% - var(--outset)), var(--grad)),
+      linear-gradient( transparent 50%, rgb(255 255 255 / .25), rgb(0 0 0 /.25));
+    border-radius: var(--outset);
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0% 100%)
+  }
+}
+
+@layer demo {
+  * { box-sizing: border-box }
+  body { 
+    background-color: #EEEEEC;
+    margin: 0;
+    padding: 2rem;    
+    display: grid;
+    font-family: system-ui, sans-serif
+  }
+  .ol-cards {  
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+    grid-template-rows: min-content;
+    gap: 2rem;
+  }
+  h1 {
+    text-align: center;
+  }
+}
+li:hover{
+    box-shadow: 2px 1px 2px gray;
+}
