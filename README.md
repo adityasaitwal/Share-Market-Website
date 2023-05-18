@@ -1,1 +1,1 @@
-Share Market Website designed for an Education center 
+Share Market Website designed using Angular for an Education center.
